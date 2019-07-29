@@ -4,9 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-// var axios = require('axios');
-// var cheerio = require('cheerio');
-// var db = require("./models")
 
 var indexRouter = require('./routes/index');
 var savedRouter = require('./routes/saved');

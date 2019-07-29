@@ -28,17 +28,13 @@ var ArticleSchema = new Schema({
         default: false
     },
 
-    comment: {
+    // this needs to be an array of objects so each article can have many comments
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    }
+    }]
 
 });
-
-ArticleSchema.methods.saveArticle = function (params) {
-    this.saved = true;
-    return this.saved;
-};
 
 var Article = mongoose.model("Article", ArticleSchema);
 

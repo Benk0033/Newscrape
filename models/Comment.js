@@ -13,11 +13,6 @@ var CommentSchema = new Schema({
 
 });
 
-CommentSchema.methods.saveComment = function (params) {
-    this.saved = true;
-    return this.saved;
-};
-
 var Comment = mongoose.model("Comment", CommentSchema);
 
 module.exports = Comment;
