@@ -26,9 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGO_URI);
+mongoose.connect(MONGODB_URI);
 
 app.use('/', indexRouter);
 app.use('/saved', savedRouter);
