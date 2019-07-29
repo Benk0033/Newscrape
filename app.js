@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var MONGO_URI = process.env.MONGO_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+mongoose.connect(MONGO_URI);
 
 app.use('/', indexRouter);
 app.use('/saved', savedRouter);
