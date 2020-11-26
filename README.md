@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/47204339/62017460-90c5a600-b16b-11e9-84bc-9cb786dffb5e.png)
 
 Link to live application:
-https://glacial-anchorage-99104.herokuapp.com/
+https://yahoonewsscraper.herokuapp.com/
 
 This is a web app that lets users view and leave comments on the latest news from Yahoo.com.
 
