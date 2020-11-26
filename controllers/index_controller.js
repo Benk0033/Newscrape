@@ -8,23 +8,29 @@ exports.scrape = function (req, res, next) {
 
         var $ = cheerio.load(response.data);
 
-        $("li[data-type='article']").find("div.strm-headline").each(function (i, element) {
+        $(".stream-item-title").each(function (i, element) {
 
             // variable to store headline, summary, and url from scraped articles
-            var result = {};
 
-            result.headline = $(this).find(".js-content-title").text();
-            result.summary = $(this).find("p").text();
-            result.url = $(this).find("a").attr("href");
-            result.saved = false;
+            var headline = $(element).children("a").children("span").text();
+            var summary = $(element).siblings("p").text();
+            var url = "https://www.yahoo.com" + $(element).children("a").attr("href");
 
-            // only update db with unique articles
-            db.Article.update(result, { $setOnInsert: result }, { upsert: true }).then(function (newArticle) {
-                console.log(newArticle);
-            }).catch(function (err) {
-                console.log(err);
+            if (headline && summary && url) {
 
-            });
+                db.Article.insertMany({
+                    headline: headline,
+                    summary: summary,
+                    url: url,
+                    save: false
+                }).catch(function (err) {
+                    console.log(err);
+
+                })
+
+
+            }
+
         });
         res.redirect("/")
     });
@@ -33,7 +39,7 @@ exports.scrape = function (req, res, next) {
 // displays articles in which saved = false
 exports.showArticles = function (req, res, next) {
 
-    db.Article.find({ saved: false }).then(function (dbArticle) {
+    db.Article.find({ saved: false }).lean().then(function (dbArticle) {
 
         // create handlebars object
         var hbsArticles = {

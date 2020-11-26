@@ -10,6 +10,12 @@ var savedRouter = require('./routes/saved');
 
 var app = express();
 
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+var uri = process.env.MONGODB_URI
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 // view engine setup -
 app.set('views', path.join(__dirname, 'views'));
 
@@ -25,10 +31,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-mongoose.connect(MONGODB_URI);
 
 app.use('/', indexRouter);
 app.use('/saved', savedRouter);

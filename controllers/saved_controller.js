@@ -2,7 +2,7 @@ var db = require('../models');
 
 // render articles in which saved = true onto saved.handlebars
 exports.showSaved = function (req, res, next) {
-    db.Article.find({ saved: true }).then(function (dbArticle) {
+    db.Article.find({ saved: true }).lean().then(function (dbArticle) {
 
         var hbsSavedArticles = {
             savedArticles: dbArticle
